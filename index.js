@@ -1,11 +1,11 @@
 let pg = require('pg')
 let client = new pg.Client(
     {
-        user: 'postgres',
-        password: 'postgres',
-        database: 'nsx',
-        host: 'localhost',
-        port: 5432
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME,
+        host: process.env.DB_HOST,
+        port: process.env.DB_POST
     }
 )
 
@@ -20,6 +20,9 @@ client.connect()
 const express = require('express')
 const app = express()
 const port = 5000
+const env = require('dotenv').config()
+
+console.log(env)
 
 app.set('view engine', 'ejs')
 
@@ -28,7 +31,7 @@ app.get('/api/categories', (req, res) =>
     let client = new pg.Client(
         {
             user: 'postgres',
-            password: 'postgres',
+            password: '7480',
             database: 'nsx',
             host: 'localhost',
             port: 5432
@@ -37,7 +40,7 @@ app.get('/api/categories', (req, res) =>
     client.connect()
     client.query('select * from categories', function(err, results) 
     {
-        res.render('index', {
+        res.render('categories', {
             cates: results.rows
         })
         client.end()
@@ -50,7 +53,7 @@ app.get('/api/customers', (req, res) =>
     let client = new pg.Client(
         {
             user: 'postgres',
-            password: 'postgres',
+            password: '7480',
             database: 'nsx',
             host: 'localhost',
             port: 5432
@@ -71,21 +74,28 @@ app.get('/api/farms', (req, res) =>
 {
     let client = new pg.Client(
         {
-            user: 'postgres',
-            password: 'postgres',
-            database: 'nsx',
-            host: 'localhost',
-            port: 5432
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME,
+            host: process.env.DB_HOST,
+            port: process.env.DB_POST
         }
     )
         client.connect()
     client.query('select * from farms', function(err, results) 
     {
+    if (err){
+
+    }
+
+    {
         res.render('farms', {
             farms: results.rows
         })
+    }
         client.end()
     })
+    
 })
 
 
@@ -94,7 +104,7 @@ app.get('/api/products', (req, res) =>
     let client = new pg.Client(
         {
             user: 'postgres',
-            password: 'postgres',
+            password: '7480',
             database: 'nsx',
             host: 'localhost',
             port: 5432
