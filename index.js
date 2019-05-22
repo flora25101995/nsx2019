@@ -30,11 +30,11 @@ app.get('/api/categories', (req, res) =>
 {
     let client = new pg.Client(
         {
-            user: 'postgres',
-            password: '7480',
-            database: 'nsx',
-            host: 'localhost',
-            port: 5432
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME,
+            host: process.env.DB_HOST,
+            port: process.env.DB_POST
         }
     )
     client.connect()
@@ -52,11 +52,11 @@ app.get('/api/customers', (req, res) =>
 {
     let client = new pg.Client(
         {
-            user: 'postgres',
-            password: '7480',
-            database: 'nsx',
-            host: 'localhost',
-            port: 5432
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME,
+            host: process.env.DB_HOST,
+            port: process.env.DB_POST
         }
     )
     client.connect()
@@ -82,10 +82,15 @@ app.get('/api/farms', (req, res) =>
         }
     )
         client.connect()
-    client.query('select * from farms', function(err, results) 
+    client.query('select farms.id, farms.name, farms.owner, farms.address, farms.phone, products.name as pro_name from farms, products where products.id = farms.product_id', function(err, results) 
     {
     if (err){
-
+        console.log(err)
+        return res.render('err',{
+            status: 400,
+            mess: '',
+            farms: []
+        })
     }
 
     {
@@ -98,16 +103,51 @@ app.get('/api/farms', (req, res) =>
     
 })
 
+//lay thong tin nong trai theo id
+app.get('/api/farms/:id', (req, res) => 
+{   
+    let sql = `select * from farms where id=${req.params.id}`
+    console.log(req.params, sql)
+    let client = new pg.Client(
+        {
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME,
+            host: process.env.DB_HOST,
+            port: process.env.DB_POST
+        }
+    )
+    client.connect()
+    client.query(sql, function(err, results) 
+    {
+    if (err){
+        console.log(err)
+        return res.render('err',{
+            status: 400,
+            mess: '',
+            farms: []
+        })
+    }
+
+    {
+        res.render('farms', {
+            farms: results.rows
+        })
+    }
+    client.end()
+    })
+    
+})
 
 app.get('/api/products', (req, res) => 
 {
     let client = new pg.Client(
         {
-            user: 'postgres',
-            password: '7480',
-            database: 'nsx',
-            host: 'localhost',
-            port: 5432
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME,
+            host: process.env.DB_HOST,
+            port: process.env.DB_POST
         }
     )
         client.connect()
