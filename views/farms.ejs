@@ -1,0 +1,43 @@
+<style>
+        table
+        {
+          width: 100%;
+          border: 1px solid;
+        }
+      
+        td
+        {
+          text-align: left;
+          padding-left: 10px;
+        }
+      
+        th
+        {
+          background-color: rgb(179, 179, 179);
+        }
+      
+      </style>
+      
+
+<table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Owner</th>
+            <th>Address</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% farms.forEach(function(farm){ %>
+              <tr>
+                <td><%=farm.id%></td>
+                <td><%=farm.name%></td>
+                <td><%=farm.owner%></td>
+                <td><%=farm.address%></td>          
+                <td><%=farm.phone%></td>
+              </tr>
+            <% }); %>
+        </tbody>
+      </table>

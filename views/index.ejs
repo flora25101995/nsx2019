@@ -23,15 +23,15 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>Name</th>
-      <th>Class</th>
     </tr>
   </thead>
   <tbody>
-      <% users.forEach(function(user){ %>
+      <% cates.forEach(function(cate){ %>
         <tr>
-          <td><%=user.name%></td>
-          <td><%=user.class%></td>
+          <td><%=cate.id%></td>
+          <td><%=cate.name%></td>
         </tr>
       <% }); %>
   </tbody>

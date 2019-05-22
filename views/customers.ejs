@@ -1,0 +1,45 @@
+<style>
+        table
+        {
+          width: 100%;
+          border: 1px solid;
+        }
+      
+        td
+        {
+          text-align: left;
+          padding-left: 10px;
+        }
+      
+        th
+        {
+          background-color: rgb(179, 179, 179);
+        }
+      
+      </style>
+      
+
+<table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address></th>
+          </tr>
+        </thead>
+        <tbody>
+            <% customers.forEach(function(customer){ %>
+              <tr>
+                <td><%=customer.id%></td>
+                <td><%=customer.name%></td>
+                <td><%=customer.gender%></td>
+                <td><%=customer.phone%></td>          
+                <td><%=customer.email%></td>
+                <td><%=customer.address%></td>
+              </tr>
+            <% }); %>
+        </tbody>
+      </table>

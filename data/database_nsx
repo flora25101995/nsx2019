@@ -1,0 +1,528 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.3
+-- Dumped by pg_dump version 11.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: categories; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.categories (
+    id integer NOT NULL,
+    name character(100)
+);
+
+
+ALTER TABLE public.categories OWNER TO postgres;
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.categories_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.categories_id_seq OWNER TO postgres;
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
+
+
+--
+-- Name: customers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.customers (
+    id integer NOT NULL,
+    name character(100),
+    gender character(5),
+    phone character(20),
+    email character(50),
+    address text
+);
+
+
+ALTER TABLE public.customers OWNER TO postgres;
+
+--
+-- Name: customers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.customers_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.customers_id_seq OWNER TO postgres;
+
+--
+-- Name: customers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.customers_id_seq OWNED BY public.customers.id;
+
+
+--
+-- Name: farms; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.farms (
+    id integer NOT NULL,
+    name character(50),
+    owner character(50),
+    address character(100),
+    phone character(20),
+    product_id integer
+);
+
+
+ALTER TABLE public.farms OWNER TO postgres;
+
+--
+-- Name: farms_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.farms_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.farms_id_seq OWNER TO postgres;
+
+--
+-- Name: farms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.farms_id_seq OWNED BY public.farms.id;
+
+
+--
+-- Name: products; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products (
+    id integer NOT NULL,
+    name character(100),
+    amount integer,
+    price integer,
+    description text,
+    brand_id integer,
+    category_id integer
+);
+
+
+ALTER TABLE public.products OWNER TO postgres;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_id_seq OWNER TO postgres;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
+
+
+--
+-- Name: categories id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.categories_id_seq'::regclass);
+
+
+--
+-- Name: customers id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.customers ALTER COLUMN id SET DEFAULT nextval('public.customers_id_seq'::regclass);
+
+
+--
+-- Name: farms id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.farms ALTER COLUMN id SET DEFAULT nextval('public.farms_id_seq'::regclass);
+
+
+--
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
+
+
+--
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.categories (id, name) FROM stdin;
+1	ngu coc                                                                                             
+2	rau cu                                                                                              
+3	hoa qua                                                                                             
+\.
+
+
+--
+-- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.customers (id, name, gender, phone, email, address) FROM stdin;
+1	Bethanne                                                                                            	F    	296-310-3384        	bcampion0@zimbio.com                              	62 Brickson Park Center
+2	Barri                                                                                               	M    	381-448-3947        	blagde1@businessweek.com                          	24 Katie Circle
+3	Deborah                                                                                             	F    	919-845-8942        	dthreadgold2@etsy.com                             	58548 Charing Cross Center
+4	Doreen                                                                                              	F    	632-590-3540        	dfulcher3@wordpress.org                           	87477 Mitchell Center
+5	Bernadine                                                                                           	F    	263-927-1587        	bduke4@stumbleupon.com                            	5493 Hansons Way
+6	Augy                                                                                                	M    	913-817-3354        	abrockley5@g.co                                   	1853 Eagan Alley
+7	Darice                                                                                              	F    	106-833-2482        	dvanderplas6@alexa.com                            	7 Bartillon Street
+8	Miranda                                                                                             	F    	878-277-8773        	mdignum7@123-reg.co.uk                            	10 La Follette Road
+9	Weston                                                                                              	M    	905-422-8980        	warntzen8@mysql.com                               	05 Fisk Center
+10	Bethena                                                                                             	F    	591-964-0324        	bsymones9@yolasite.com                            	28 Northwestern Junction
+11	Mike                                                                                                	M    	554-166-8013        	mpentecosta@bbc.co.uk                             	9 Briar Crest Terrace
+12	Fiona                                                                                               	F    	288-443-5064        	fcostinb@jigsy.com                                	197 Sundown Alley
+13	Olivie                                                                                              	F    	513-870-6055        	ogallahuec@liveinternet.ru                        	285 Rowland Center
+14	Lancelot                                                                                            	M    	146-944-3141        	lfranchionid@upenn.edu                            	18143 Arkansas Lane
+15	Melodee                                                                                             	F    	873-301-3646        	mhubbersteye@icq.com                              	21821 Armistice Avenue
+16	Ashton                                                                                              	M    	387-579-9228        	ahuertaf@squarespace.com                          	95098 Declaration Plaza
+17	Mildred                                                                                             	F    	171-335-2875        	mevittg@huffingtonpost.com                        	44026 Hanson Place
+18	Aleta                                                                                               	F    	220-290-4110        	akeggh@hubpages.com                               	2 Arizona Way
+19	Zachery                                                                                             	M    	851-194-2788        	zauchterlonyi@discuz.net                          	266 Waxwing Plaza
+20	Bill                                                                                                	F    	705-153-1040        	bmccutcheonj@digg.com                             	9745 Summit Court
+21	Bobbi                                                                                               	F    	629-495-0768        	bcoronak@ucsd.edu                                 	8757 Pennsylvania Trail
+22	Dimitri                                                                                             	M    	110-826-4059        	dladloel@dedecms.com                              	80188 Prentice Drive
+23	Madalena                                                                                            	F    	709-374-3894        	mclericoatesm@people.com.cn                       	0 Southridge Center
+24	Stefano                                                                                             	M    	342-527-9213        	srarityn@msn.com                                  	370 Ohio Hill
+25	Bette-ann                                                                                           	F    	203-993-0416        	bmceweno@netscape.com                             	115 Oneill Crossing
+26	Neill                                                                                               	M    	652-835-0945        	nputtenp@addthis.com                              	100 Talisman Road
+27	Fonsie                                                                                              	M    	786-631-5972        	fhaileq@booking.com                               	909 Moland Terrace
+28	Tamiko                                                                                              	F    	570-390-4237        	tchaffer@elpais.com                               	6541 Artisan Street
+29	Zebulen                                                                                             	M    	719-200-7673        	zbonnettes@apache.org                             	3 Hoffman Terrace
+30	Lotte                                                                                               	F    	595-356-3191        	lchorltont@odnoklassniki.ru                       	3641 Erie Way
+\.
+
+
+--
+-- Data for Name: farms; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.farms (id, name, owner, address, phone, product_id) FROM stdin;
+1	Janyx                                             	Ty Cricket                                        	6041 Hanover Road                                                                                   	877-964-7212        	148
+2	Edgetag                                           	Hodge Zaple                                       	49 Almo Pass                                                                                        	673-721-7506        	85
+3	Agivu                                             	Evan Eggleson                                     	25 Nova Hill                                                                                        	542-831-3741        	127
+4	Ainyx                                             	Lorenzo Hovee                                     	431 Sutherland Pass                                                                                 	764-146-2485        	150
+5	Oyoba                                             	Adelind Lanfere                                   	8 Bluejay Court                                                                                     	233-558-8846        	33
+6	Centidel                                          	Fedora Radden                                     	62 Melody Road                                                                                      	794-517-4977        	72
+7	Skyndu                                            	Javier Stookes                                    	8 Summerview Alley                                                                                  	415-814-6746        	146
+8	Lazzy                                             	Felicio Raggles                                   	9750 Center Parkway                                                                                 	100-558-5105        	132
+9	Omba                                              	Donny Rapaport                                    	62814 Harper Alley                                                                                  	479-492-2540        	138
+10	Oyoyo                                             	Corby Ferrier                                     	9 Dixon Court                                                                                       	921-171-4107        	100
+11	Izio                                              	Reggis Stennet                                    	0233 Stone Corner Road                                                                              	698-770-2970        	40
+12	Oloo                                              	Yancey Mattheus                                   	00694 Golf Course Junction                                                                          	363-749-9326        	148
+13	Trudeo                                            	Denver Tregoning                                  	1 Warner Terrace                                                                                    	898-280-5317        	71
+14	Twitterworks                                      	Marilee Janczak                                   	886 Charing Cross Point                                                                             	667-943-9481        	147
+15	Camido                                            	Anatole Swaisland                                 	8 Schurz Lane                                                                                       	389-119-1966        	89
+16	Dablist                                           	Granger Bassingham                                	45571 Anderson Lane                                                                                 	581-837-6219        	53
+17	Zoombox                                           	Huberto Ravenshaw                                 	8 Sunfield Place                                                                                    	205-141-6804        	115
+18	Skinder                                           	Fanchette Vigrass                                 	3303 Stephen Alley                                                                                  	613-117-0421        	82
+19	Trudeo                                            	Chloette Scragg                                   	38889 Morrow Street                                                                                 	886-459-1831        	121
+20	Photobean                                         	Evangelin Huleatt                                 	4 South Avenue                                                                                      	718-792-8317        	11
+21	Voomm                                             	Lorry Sarah                                       	86 Northfield Circle                                                                                	356-934-8525        	3
+22	Dazzlesphere                                      	Elisabetta Shurmer                                	2 Sloan Point                                                                                       	979-249-5693        	48
+23	Zoonder                                           	Allen MacCartney                                  	1 Spaight Trail                                                                                     	127-520-3895        	16
+24	Skinder                                           	Gerek Inderwick                                   	43 8th Road                                                                                         	666-435-0222        	52
+25	Edgeify                                           	Gibb Lopes                                        	47 Waubesa Point                                                                                    	224-205-6825        	143
+26	Devshare                                          	Ranice Grigolashvill                              	07437 Manufacturers Street                                                                          	180-430-6823        	15
+27	Devpulse                                          	Antoni Deners                                     	39177 Kim Crossing                                                                                  	179-334-9264        	58
+28	Blogspan                                          	Fionnula Goodlip                                  	4 Kim Drive                                                                                         	744-584-8983        	5
+29	Thoughtmix                                        	Estella Carus                                     	19 Esch Court                                                                                       	242-835-5207        	69
+30	Bubblemix                                         	Jonathan Woodall                                  	2 Dottie Road                                                                                       	752-410-5821        	74
+31	Wikizz                                            	Benedikt Girth                                    	802 Jay Trail                                                                                       	858-189-1553        	71
+32	Twitterwire                                       	Rina Peagrim                                      	6256 Johnson Way                                                                                    	241-321-5441        	103
+33	Zoomlounge                                        	Cheslie Nickerson                                 	43 Bultman Street                                                                                   	435-732-3616        	61
+34	Npath                                             	Sheffy Montez                                     	56969 Arrowood Place                                                                                	269-283-4592        	47
+35	Aimbu                                             	Chrissy Lukasen                                   	648 Burrows Lane                                                                                    	258-854-8778        	82
+36	Fadeo                                             	Giffard Longmead                                  	24 Commercial Place                                                                                 	864-149-2134        	75
+37	Oyoloo                                            	Claybourne St. Paul                               	298 Hanover Center                                                                                  	846-408-3115        	102
+38	Realblab                                          	Ashil Grgic                                       	5781 Farragut Avenue                                                                                	642-897-1927        	76
+39	Viva                                              	Matias Oland                                      	6023 Lerdahl Point                                                                                  	762-230-4607        	125
+40	Trudoo                                            	Stacy Woodcraft                                   	3608 Mayer Crossing                                                                                 	509-606-5652        	30
+41	Photobug                                          	Junina Mapstone                                   	217 Thackeray Center                                                                                	946-746-5142        	22
+42	Youspan                                           	Huntlee Klewer                                    	9 Sugar Terrace                                                                                     	214-958-3888        	71
+43	Eazzy                                             	Jobi Beggan                                       	73 Crest Line Parkway                                                                               	561-692-9936        	76
+44	Jazzy                                             	Merell Symcock                                    	980 Sugar Point                                                                                     	475-352-8063        	10
+45	Yakijo                                            	Ardene Swateridge                                 	6 Mandrake Junction                                                                                 	375-222-7189        	101
+46	Demizz                                            	Charlton Ebrall                                   	46 Havey Drive                                                                                      	228-934-7931        	40
+47	Plambee                                           	Jennette Smy                                      	0981 Graedel Court                                                                                  	155-113-0917        	70
+48	Gevee                                             	Hermann De Atta                                   	2 Bartillon Trail                                                                                   	599-942-6759        	110
+49	Voonder                                           	Cord Cottisford                                   	00 Westend Court                                                                                    	179-190-6066        	25
+50	Quatz                                             	Jeniffer Reap                                     	77018 Reinke Parkway                                                                                	575-380-0949        	19
+\.
+
+
+--
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products (id, name, amount, price, description, brand_id, category_id) FROM stdin;
+1	Chef Hat 20cm                                                                                       	58	22401	sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit	\N	2
+2	Island Oasis - Strawberry                                                                           	67	38824	faucibus cursus urna ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit nec	\N	4
+3	Clams - Bay                                                                                         	26	87994	lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis	\N	3
+4	Pork - Suckling Pig                                                                                 	78	58633	vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede	\N	2
+5	Cheese - Brie, Triple Creme                                                                         	22	26098	massa id nisl venenatis lacinia aenean sit amet justo morbi ut	\N	3
+6	Lettuce - Boston Bib                                                                                	2	18091	nulla sed vel enim sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum	\N	2
+7	Beef - Tenderloin - Aa                                                                              	35	97496	tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis turpis	\N	4
+8	Beef - Kobe Striploin                                                                               	39	3871	maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut	\N	2
+9	Tea - English Breakfast                                                                             	7	64406	sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in quis justo maecenas	\N	1
+10	Quiche Assorted                                                                                     	31	89640	sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi	\N	1
+11	Marsala - Sperone, Fine, D.o.c.                                                                     	90	51455	justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit	\N	4
+12	Shrimp - Baby, Cold Water                                                                           	90	12545	quis odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices	\N	4
+13	Pork - Smoked Kassler                                                                               	73	81653	erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam	\N	3
+14	Soup - Knorr, Chicken Noodle                                                                        	99	84493	ac lobortis vel dapibus at diam nam tristique tortor eu	\N	4
+15	Cake - Dulce De Leche                                                                               	95	37295	erat eros viverra eget congue eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam	\N	3
+16	Wine - Red, Mouton Cadet                                                                            	21	73856	vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo	\N	2
+17	Quail - Whole, Bone - In                                                                            	23	15746	dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at	\N	4
+18	Chinese Foods - Cantonese                                                                           	33	56804	velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum velit id pretium iaculis diam	\N	2
+19	Sprouts - Alfalfa                                                                                   	30	10186	quis tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus	\N	3
+20	Rappini - Andy Boy                                                                                  	60	15190	magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus	\N	4
+21	Soup - Campbells Chili                                                                              	77	78204	nulla ultrices aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras	\N	1
+22	Wine - Magnotta - Pinot Gris Sr                                                                     	41	88790	rutrum rutrum neque aenean auctor gravida sem praesent id massa	\N	3
+23	The Pop Shoppe - Lime Rickey                                                                        	38	37269	pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna	\N	3
+24	Cranberries - Frozen                                                                                	24	7337	vestibulum sit amet cursus id turpis integer aliquet massa id	\N	1
+25	Nougat - Paste / Cream                                                                              	38	37457	nunc proin at turpis a pede posuere nonummy integer non velit	\N	4
+26	Cheese - Brie Roitelet                                                                              	49	9098	hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt	\N	1
+27	Chicken - White Meat, No Tender                                                                     	87	29948	praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget	\N	3
+28	Pork - Sausage, Medium                                                                              	91	97435	consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus	\N	1
+29	Mix - Cappucino Cocktail                                                                            	96	58021	ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis	\N	1
+30	Bread - Burger                                                                                      	64	35662	felis sed lacus morbi sem mauris laoreet ut rhoncus aliquet	\N	3
+31	Turnip - Mini                                                                                       	80	27956	justo pellentesque viverra pede ac diam cras pellentesque volutpat dui	\N	2
+32	Coffee Beans - Chocolate                                                                            	5	53804	sapien arcu sed augue aliquam erat volutpat in congue etiam	\N	1
+33	Flavouring - Raspberry                                                                              	5	40205	sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum	\N	3
+34	Sauce Bbq Smokey                                                                                    	84	25603	ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla	\N	2
+35	Soup - Campbells Beef Noodle                                                                        	91	64306	ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam	\N	1
+36	Onions - Spanish                                                                                    	9	96177	cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut	\N	3
+37	Creme De Cacao White                                                                                	49	23596	blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing	\N	1
+38	Wine - Alsace Gewurztraminer                                                                        	62	70761	ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et	\N	1
+39	Longos - Penne With Pesto                                                                           	81	62117	sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa	\N	1
+40	Numi - Assorted Teas                                                                                	44	78084	odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla	\N	1
+41	Wine - Placido Pinot Grigo                                                                          	11	94620	odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla	\N	4
+42	Wine - White, Chardonnay                                                                            	80	24755	in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing	\N	3
+43	Tea - Orange Pekoe                                                                                  	79	73228	viverra eget congue eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam dui	\N	2
+44	Veal - Provimi Inside                                                                               	32	50955	elit ac nulla sed vel enim sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum	\N	3
+45	Sausage - Liver                                                                                     	43	91798	ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent	\N	3
+46	Onions - Red                                                                                        	27	77389	vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris	\N	4
+47	Vodka - Hot, Lnferno                                                                                	65	87741	odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui	\N	4
+48	Numi - Assorted Teas                                                                                	30	48897	in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet maecenas leo odio condimentum	\N	2
+49	Veal - Inside, Choice                                                                               	69	3237	vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer	\N	2
+50	Snapple - Iced Tea Peach                                                                            	28	35651	magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel	\N	1
+51	Beans - Fava, Canned                                                                                	9	59220	nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id	\N	1
+52	Leeks - Large                                                                                       	41	20831	nullam orci pede venenatis non sodales sed tincidunt eu felis fusce	\N	4
+53	Onions - Cooking                                                                                    	60	61441	ac lobortis vel dapibus at diam nam tristique tortor eu	\N	3
+54	Cookie Dough - Chocolate Chip                                                                       	67	78466	iaculis justo in hac habitasse platea dictumst etiam faucibus cursus urna ut tellus	\N	4
+55	Cucumber - English                                                                                  	37	88895	amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor	\N	1
+56	Red Snapper - Fresh, Whole                                                                          	85	26314	porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non lectus	\N	1
+57	Curry Paste - Green Masala                                                                          	52	56043	enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis	\N	4
+58	Beans - Yellow                                                                                      	18	799	praesent lectus vestibulum quam sapien varius ut blandit non interdum in	\N	3
+59	Table Cloth 120 Round White                                                                         	93	35569	pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus	\N	3
+60	Coffee - Hazelnut Cream                                                                             	93	76279	vulputate nonummy maecenas tincidunt lacus at velit vivamus vel nulla eget eros elementum pellentesque quisque porta volutpat	\N	2
+61	Ecolab - Medallion                                                                                  	45	10477	erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu	\N	1
+62	Soup - Cream Of Broccoli, Dry                                                                       	19	88474	in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris	\N	2
+63	Cheese - Cheddar, Old White                                                                         	76	21019	dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo	\N	1
+64	Veal - Inside                                                                                       	7	54467	purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient	\N	1
+65	Toamtoes 6x7 Select                                                                                 	18	62063	lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus	\N	2
+66	Artichokes - Jerusalem                                                                              	50	50466	pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue	\N	2
+67	Limes                                                                                               	69	82083	non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla	\N	2
+68	Tomatoes - Vine Ripe, Yellow                                                                        	81	61558	praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla	\N	1
+69	Nut - Peanut, Roasted                                                                               	47	14842	hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem	\N	1
+70	Wine - White, Pinot Grigio                                                                          	56	96102	tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean	\N	2
+71	Numi - Assorted Teas                                                                                	48	93491	ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus	\N	4
+72	Muffin - Bran Ind Wrpd                                                                              	57	38407	amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit	\N	4
+73	Marjoram - Fresh                                                                                    	6	43999	ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at	\N	4
+74	Vodka - Hot, Lnferno                                                                                	18	98708	integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi	\N	3
+75	Mace Ground                                                                                         	11	41496	consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus	\N	3
+76	Mikes Hard Lemonade                                                                                 	99	46524	vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur	\N	1
+77	Chicken - White Meat, No Tender                                                                     	2	2138	vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed tristique	\N	3
+78	Rhubarb                                                                                             	46	25821	fusce consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis turpis enim blandit mi in porttitor	\N	2
+79	Chocolate - Pistoles, White                                                                         	31	23239	scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed	\N	2
+80	Soup - Knorr, Chicken Noodle                                                                        	41	75655	eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis	\N	4
+81	Wine - Bourgogne 2002, La                                                                           	80	51229	cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus	\N	1
+82	Vodka - Hot, Lnferno                                                                                	97	92714	diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non	\N	1
+83	Pork Loin Cutlets                                                                                   	33	47522	pede justo eu massa donec dapibus duis at velit eu est congue	\N	2
+84	Bread Base - Gold Formel                                                                            	47	1707	nec condimentum neque sapien placerat ante nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse	\N	1
+85	Sobe - Green Tea                                                                                    	29	30031	massa donec dapibus duis at velit eu est congue elementum in hac habitasse platea dictumst	\N	3
+86	Meldea Green Tea Liquor                                                                             	83	63015	ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla	\N	3
+87	Lamb - Whole Head Off                                                                               	73	36618	diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non	\N	4
+88	Chocolate Liqueur - Godet White                                                                     	76	87612	sapien varius ut blandit non interdum in ante vestibulum ante ipsum primis in faucibus orci luctus et ultrices	\N	4
+89	Wine - Riesling Alsace Ac 2001                                                                      	15	84362	odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim lorem	\N	2
+90	Wine - Pinot Noir Stoneleigh                                                                        	97	29205	eu orci mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a	\N	3
+91	Couscous                                                                                            	24	90657	adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula	\N	2
+92	Cup - 8oz Coffee Perforated                                                                         	29	60187	diam id ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu sed augue aliquam	\N	1
+93	Oil - Truffle, White                                                                                	84	86273	duis at velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum velit id pretium iaculis	\N	3
+94	Tart - Lemon                                                                                        	39	337	risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet	\N	2
+95	Burger Veggie                                                                                       	91	68941	tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi	\N	1
+96	Wine - Vineland Estate Semi - Dry                                                                   	46	22730	fusce consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis turpis enim blandit mi	\N	4
+97	Onions - Cooking                                                                                    	98	50327	accumsan odio curabitur convallis duis consequat dui nec nisi volutpat eleifend	\N	4
+98	Chilli Paste, Hot Sambal Oelek                                                                      	8	44342	eget eros elementum pellentesque quisque porta volutpat erat quisque erat eros viverra	\N	3
+99	Nantucket - Carrot Orange                                                                           	63	82989	sapien dignissim vestibulum vestibulum ante ipsum primis in faucibus orci	\N	1
+100	Flour - Fast / Rapid                                                                                	60	93824	dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae	\N	4
+101	Honey - Lavender                                                                                    	55	78203	suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis	\N	2
+102	Wine - Chateau Bonnet                                                                               	41	32582	elementum pellentesque quisque porta volutpat erat quisque erat eros viverra eget congue eget semper rutrum nulla nunc purus phasellus in	\N	3
+103	Chocolate - Unsweetened                                                                             	80	90811	in hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum	\N	2
+104	Wine - Blue Nun Qualitatswein                                                                       	94	80654	sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo	\N	3
+105	Arctic Char - Fillets                                                                               	88	24762	pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis	\N	3
+106	Beer - Guiness                                                                                      	39	330	velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo	\N	4
+107	Cheese - Gouda                                                                                      	84	55824	felis fusce posuere felis sed lacus morbi sem mauris laoreet ut rhoncus	\N	1
+108	Lychee                                                                                              	21	68812	nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus vel nulla eget	\N	2
+109	Walkers Special Old Whiskey                                                                         	27	39897	arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum	\N	2
+110	Tahini Paste                                                                                        	27	82440	risus praesent lectus vestibulum quam sapien varius ut blandit non	\N	2
+111	Chicken - Base, Ultimate                                                                            	6	89378	cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut	\N	1
+112	Table Cloth 53x53 White                                                                             	23	95770	penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor	\N	4
+113	Lamb Shoulder Boneless Nz                                                                           	78	89693	nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer	\N	3
+114	Muffin Mix - Lemon Cranberry                                                                        	10	21547	varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus	\N	3
+115	Wine - Spumante Bambino White                                                                       	35	82395	proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien	\N	3
+116	Salmon - Whole, 4 - 6 Pounds                                                                        	35	72292	leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam	\N	4
+117	Rabbit - Frozen                                                                                     	42	51947	metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae	\N	4
+118	Cardamon Seed / Pod                                                                                 	59	40815	iaculis diam erat fermentum justo nec condimentum neque sapien placerat ante nulla	\N	4
+119	Tia Maria                                                                                           	100	16769	mollis molestie lorem quisque ut erat curabitur gravida nisi at	\N	3
+120	Sachet                                                                                              	25	63997	at dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam	\N	2
+121	Wine - Cave Springs Dry Riesling                                                                    	63	6318	ante nulla justo aliquam quis turpis eget elit sodales scelerisque	\N	2
+122	Wine - Bourgogne 2002, La                                                                           	6	56115	lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu felis fusce	\N	1
+123	Flounder - Fresh                                                                                    	85	90639	turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh	\N	3
+124	Cheese - Cheddar, Old White                                                                         	11	5310	pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel enim sit	\N	4
+125	Shrimp - Black Tiger 13/15                                                                          	59	71184	dolor quis odio consequat varius integer ac leo pellentesque ultrices	\N	3
+126	Kumquat                                                                                             	14	86858	pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis	\N	1
+127	Coffee Cup 16oz Foam                                                                                	30	43147	sem praesent id massa id nisl venenatis lacinia aenean sit	\N	3
+128	Roe - White Fish                                                                                    	73	84938	augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur	\N	3
+129	Beef - Sushi Flat Iron Steak                                                                        	56	62753	nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam	\N	2
+130	Crush - Cream Soda                                                                                  	24	3836	sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet	\N	2
+131	Olives - Nicoise                                                                                    	90	19580	vestibulum ac est lacinia nisi venenatis tristique fusce congue diam id ornare imperdiet	\N	1
+132	Wine - Remy Pannier Rose                                                                            	64	20475	viverra pede ac diam cras pellentesque volutpat dui maecenas tristique	\N	1
+133	Bay Leaf Ground                                                                                     	7	34520	in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae	\N	3
+134	Beans - Kidney, Red Dry                                                                             	96	31959	nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare	\N	1
+135	Cheese - Fontina                                                                                    	98	27691	proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices	\N	2
+136	Blueberries - Frozen                                                                                	88	20927	orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse	\N	1
+137	Hold Up Tool Storage Rack                                                                           	100	71812	felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo eu massa donec	\N	3
+138	Sorrel - Fresh                                                                                      	25	90831	eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero	\N	1
+139	Sobe - Tropical Energy                                                                              	31	55079	sed accumsan felis ut at dolor quis odio consequat varius integer ac leo	\N	4
+140	Lid Coffee Cup 8oz Blk                                                                              	70	44886	at dolor quis odio consequat varius integer ac leo pellentesque	\N	1
+141	Potatoes - Mini White 3 Oz                                                                          	6	98663	rhoncus dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit	\N	4
+142	Rice - Long Grain                                                                                   	97	57109	non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci	\N	4
+143	Leeks - Large                                                                                       	49	89906	orci pede venenatis non sodales sed tincidunt eu felis fusce posuere felis sed lacus morbi	\N	2
+144	Mountain Dew                                                                                        	95	8901	lacinia nisi venenatis tristique fusce congue diam id ornare imperdiet sapien urna pretium	\N	4
+145	Oneshot Automatic Soap System                                                                       	34	92178	risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis	\N	2
+146	Mushroom - Enoki, Fresh                                                                             	11	87695	suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi	\N	2
+147	Extract - Vanilla,artificial                                                                        	48	38603	justo in hac habitasse platea dictumst etiam faucibus cursus urna ut	\N	1
+148	Mushroom - Chanterelle Frozen                                                                       	100	89089	nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus	\N	1
+149	Appetizer - Escargot Puff                                                                           	73	85863	tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent	\N	1
+150	Browning Caramel Glace                                                                              	90	60830	in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa	\N	3
+\.
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.categories_id_seq', 3, true);
+
+
+--
+-- Name: customers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.customers_id_seq', 30, true);
+
+
+--
+-- Name: farms_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.farms_id_seq', 50, true);
+
+
+--
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_id_seq', 150, true);
+
+
+--
+-- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customers customers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.customers
+    ADD CONSTRAINT customers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: farms farms_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.farms
+    ADD CONSTRAINT farms_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
