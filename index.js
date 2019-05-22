@@ -1,90 +1,104 @@
+let pg = require('pg')
+let client = new pg.Client(
+    {
+        user: 'postgres',
+        password: 'postgres',
+        database: 'nsx',
+        host: 'localhost',
+        port: 5432
+    }
+)
+
+client.connect()
+
+// client.query('select * from dm_nv', function(err, results) 
+// {
+//     console.log(err, results.rows)
+// })
+
+//Copy tu https://expressjs.com/en/starter/hello-world.html
 const express = require('express')
 const app = express()
 const port = 5000
 
-app.use(express.static(__dirname + '/assets'))
-app.set('view engine', 'ejs')
-
-app.get('/api/getlist', (req, res) => {
-    res.json({
-        user: 
-        [
-            {
-                name: 'Quyen',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Dung',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Thuan',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Mai',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Nhi',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'An',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Linh',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Do',
-                class: 'PQ-WEB-D002'
-            },
-        ]
+app.get('/api/categories', (req, res) => 
+{
+    let client = new pg.Client(
+        {
+            user: 'postgres',
+            password: 'postgres',
+            database: 'nsx',
+            host: 'localhost',
+            port: 5432
+        }
+    )
+        client.connect()
+    client.query('select * from categories', function(err, results) 
+    {
+        res.send(JSON.stringify(results.rows))
+        client.end()
     })
 })
 
-app.get('/', (req, res) => {
-    res.render('index', {
-        users: 
-        [
-            {
-                name: 'Quyen',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Dung',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Thuan',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Mai',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Nhi',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'An',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Linh',
-                class: 'PQ-WEB-D002'
-            },
-            {
-                name: 'Do',
-                class: 'PQ-WEB-D002'
-            },
-        ]
+
+app.get('/api/customers', (req, res) => 
+{
+    let client = new pg.Client(
+        {
+            user: 'postgres',
+            password: 'postgres',
+            database: 'nsx',
+            host: 'localhost',
+            port: 5432
+        }
+    )
+        client.connect()
+    client.query('select * from customers', function(err, results) 
+    {
+        res.send(JSON.stringify(results.rows))
+        client.end()
     })
 })
 
-app.listen(port, () => {
-    console.log(`Server app listening on port ${port}!`)
+
+app.get('/api/farms', (req, res) => 
+{
+    let client = new pg.Client(
+        {
+            user: 'postgres',
+            password: 'postgres',
+            database: 'nsx',
+            host: 'localhost',
+            port: 5432
+        }
+    )
+        client.connect()
+    client.query('select * from farms', function(err, results) 
+    {
+        res.send(JSON.stringify(results.rows))
+        client.end()
+    })
 })
+
+
+app.get('/api/products', (req, res) => 
+{
+    let client = new pg.Client(
+        {
+            user: 'postgres',
+            password: 'postgres',
+            database: 'nsx',
+            host: 'localhost',
+            port: 5432
+        }
+    )
+        client.connect()
+    client.query('select * from products', function(err, results) 
+    {
+        res.send(JSON.stringify(results.rows))
+        client.end()
+    })
+})
+
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
